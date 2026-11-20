@@ -1,0 +1,69 @@
+{% load static %}
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}چیدمانو{% endblock %} | چیدمانو</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@2/mdui.css">
+
+  <style>
+    body{font-family:"Vazirmatn",Tahoma,sans-serif}
+    .subpage{min-height:70vh;padding:70px 0 90px;background:var(--bone)}
+    .subpage__intro{max-width:720px;margin:0 auto 34px;text-align:center}
+    .subpage__intro h1{font-size:clamp(2rem,5vw,3rem);line-height:1.5;margin:10px 0}
+    .subpage__intro p{color:var(--ink-soft)}
+    .form-panel{max-width:760px;margin:auto;padding:clamp(22px,4vw,42px);background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-lg,24px);box-shadow:var(--shadow)}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .form-grid .wide{grid-column:1/-1}
+    .form-field{width:100%;--mdui-typography-body-large-font-family:"Vazirmatn",Tahoma,sans-serif}
+    mdui-button{font-family:"Vazirmatn",Tahoma,sans-serif;--mdui-color-primary:var(--olive)}
+    .form-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:22px}
+    .form-note{color:var(--ink-soft);font-size:.92rem;margin-top:18px}
+    .form-note a{color:var(--olive);font-weight:700}
+    .messages{max-width:760px;margin:0 auto 18px}
+    .message{padding:12px 16px;border-radius:12px;background:#edf1e4;color:#424b2d;margin:8px 0}.message--error,.field-error{background:#fff0ed;color:#a33b2d}.field-error{padding:5px 9px;border-radius:8px;font-size:.85rem;margin:6px 0 0}
+    .about-layout{display:grid;grid-template-columns:1.2fr .8fr;gap:22px}
+    .about-card{padding:30px;background:var(--paper);border:1px solid var(--line);border-radius:22px}
+    .about-card p{color:var(--ink-soft)}
+    .about-highlight{background:var(--olive);color:#fff}
+    .about-highlight p{color:#ffffffd9}
+    .value-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+    .value-card{background:var(--cream);padding:20px;border-radius:16px}
+    .value-card p{margin-bottom:0;color:var(--ink-soft);font-size:.93rem}
+    .contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px}
+    .contact-item{background:var(--cream);padding:18px;border-radius:16px}
+    .contact-item strong{display:block;margin-bottom:6px}
+    .contact-item p{margin:0;color:var(--ink-soft)}
+    @media(max-width:700px){.form-grid,.about-layout,.value-grid,.contact-grid{grid-template-columns:1fr}.form-grid .wide{grid-column:auto}.subpage{padding:44px 0 65px}}
+  </style>
+</head>
+<body>
+<header class="header">
+  <div class="container header__inner">
+    <a href="{% url 'pages:home' %}" class="logo"><span class="logo__mark">⌂</span><span class="logo__text">چیدمانو</span></a>
+    <nav class="nav" aria-label="منوی اصلی">
+      <a href="{% url 'pages:home' %}" class="nav__link">صفحه اصلی</a>
+      <a href="{% url 'pages:about' %}" class="nav__link">درباره ما</a>
+      <a href="{% url 'pages:contact' %}" class="nav__link">تماس با ما</a>
+    </nav>
+    <div class="header__actions">
+      {% if user.is_authenticated %}
+        <span class="nav__link">{{ user.get_full_name|default:user.username }}</span>
+        <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="btn btn--ghost btn--sm" type="submit">خروج</button></form>
+      {% else %}
+        <a class="btn btn--ghost btn--sm" href="{% url 'login' %}">ورود</a>
+        <a class="btn btn--primary btn--sm" href="{% url 'pages:register' %}">ثبت‌نام</a>
+      {% endif %}
+    </div>
+  </div>
+</header>
+{% if messages %}<div class="container messages">{% for message in messages %}<div class="message">{{ message }}</div>{% endfor %}</div>{% endif %}
+{% block content %}{% endblock %}
+<footer class="footer"><div class="container footer__bottom"><span>© ۱۴۰۵ چیدمانو. تمامی حقوق محفوظ است.</span><span><a href="{% url 'pages:about' %}">درباره ما</a> · <a href="{% url 'pages:contact' %}">تماس با ما</a></span></div></footer>
+<script src="https://cdn.jsdelivr.net/npm/mdui@2/mdui.global.js"></script>
+</body></html>

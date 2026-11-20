@@ -1,0 +1,28 @@
+{% extends "base_subpage.html" %}
+{% block title %}تماس با ما{% endblock %}
+{% block content %}
+<main class="subpage"><div class="container">
+  <header class="subpage__intro"><span class="eyebrow">در کنار شما هستیم</span><h1>با چیدمانو در ارتباط باشید</h1><p>اگر درباره محصولات، ساخت پک دکوراسیون یا همکاری با فروشندگان پرسشی دارید، پیام‌تان را برای ما بفرستید.</p></header>
+  <section class="form-panel">
+    <div class="contact-grid">
+      <article class="contact-item"><strong>تلفن تماس</strong><p dir="ltr">021-12345678</p></article>
+      <article class="contact-item"><strong>ایمیل</strong><p dir="ltr">hello@chidemano.example</p></article>
+      <article class="contact-item"><strong>نشانی</strong><p>تهران، خیابان ولیعصر، دفتر چیدمانو</p></article>
+    </div>
+    <h2>فرم تماس با ما</h2>
+    <form method="post">
+      {% csrf_token %}
+      {% if form.non_field_errors %}<div class="message message--error">{{ form.non_field_errors }}</div>{% endif %}
+      <div class="form-grid">
+        <div><mdui-text-field class="form-field" label="نام و نام خانوادگی" name="name" value="{{ form.name.value|default:'' }}" required variant="outlined"></mdui-text-field>{% if form.name.errors %}<p class="field-error">{{ form.name.errors|striptags }}</p>{% endif %}</div>
+        <div><mdui-text-field class="form-field" label="ایمیل" name="email" type="email" value="{{ form.email.value|default:'' }}" required variant="outlined"></mdui-text-field>{% if form.email.errors %}<p class="field-error">{{ form.email.errors|striptags }}</p>{% endif %}</div>
+        <div class="wide"><mdui-text-field class="form-field wide" label="موضوع پیام" name="subject" value="{{ form.subject.value|default:'' }}" required variant="outlined"></mdui-text-field>{% if form.subject.errors %}<p class="field-error">{{ form.subject.errors|striptags }}</p>{% endif %}</div>
+        <div class="wide"><mdui-text-field class="form-field wide" label="متن پیام" name="message" type="textarea" rows="5" value="{{ form.message.value|default:'' }}" required variant="outlined"></mdui-text-field>{% if form.message.errors %}<p class="field-error">{{ form.message.errors|striptags }}</p>{% endif %}</div>
+      </div>
+      <div class="form-actions"><button type="submit" class="btn btn--primary btn--lg">
+    ارسال پیام
+</button><span class="form-note">پیام شما در پایگاه داده ذخیره می‌شود.</span></div>
+    </form>
+  </section>
+</div></main>
+{% endblock %}

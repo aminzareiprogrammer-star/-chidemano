@@ -1,0 +1,368 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>چیدمانو | بازارگاه هوشمند دکوراسیون خانه</title>
+  <meta name="description" content="چیدمانو؛ بازارگاه هوشمند دکوراسیون خانه. سبک، فضا، رنگ و بودجه‌ات را انتخاب کن و یک پک دکوراسیون هماهنگ از فروشندگان مختلف بساز.">
+  <meta name="theme-color" content="#FAF6EF">
+
+  <!-- فونت وزیرمتن -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+  <!-- ============ هدر ============ -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#home" class="logo" aria-label="چیدمانو - صفحه اصلی">
+        <span class="logo__mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32"><path d="M6 28V15a10 10 0 0 1 20 0v13"/><path d="M11 28v-9a5 5 0 0 1 10 0v9"/><path d="M3 28h26"/></svg>
+        </span>
+        <span class="logo__text">چیدمانو</span>
+      </a>
+
+      <nav class="nav" id="nav" aria-label="منوی اصلی">
+        <a href="#home" class="nav__link is-active" data-nav="home">صفحه اصلی</a>
+        <a href="#products" class="nav__link" data-nav="products">محصولات</a>
+        <a href="#packages" class="nav__link" data-nav="packages">پک‌های دکوراسیون</a>
+        <a href="#sellers" class="nav__link" data-nav="sellers">فروشندگان</a>
+        <a href="#builder" class="btn btn--primary btn--sm nav__cta">ساخت پک</a>
+        <a href="{% url 'pages:about' %}" class="nav__link">درباره ما</a>
+        <a href="{% url 'pages:contact' %}" class="nav__link">تماس با ما</a>
+      </nav>
+
+      <div class="header__actions">
+        <a class="btn btn--ghost btn--sm" href="{% url 'login' %}">ورود</a>
+        <a class="btn btn--primary btn--sm" href="{% url 'pages:register' %}">ثبت‌نام</a>
+        <button class="icon-btn" id="searchToggle" type="button" aria-label="جست‌وجو" aria-expanded="false">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        </button>
+        <button class="icon-btn" id="wishlistToggle" type="button" aria-label="علاقه‌مندی‌ها">
+          <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-9.2-9A5 5 0 0 1 12 6a5 5 0 0 1 9.2 5c-2.2 4.6-9.2 9-9.2 9z"/></svg>
+          <span class="count-badge" id="wishlistCount">۰</span>
+        </button>
+        <button class="icon-btn" id="cartToggle" type="button" aria-label="سبد خرید">
+          <svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+          <span class="count-badge" id="cartCount">۰</span>
+        </button>
+        <button class="icon-btn menu-toggle" id="menuToggle" type="button" aria-label="باز کردن منو" aria-expanded="false" aria-controls="nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- پنل جست‌وجو -->
+    <div class="search-panel" id="searchPanel" aria-hidden="true">
+      <div class="container">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="search" id="searchInput" placeholder="جست‌وجوی محصول، دسته‌بندی، سبک یا فروشنده..." autocomplete="off">
+          <button class="icon-btn icon-btn--sm" id="searchClose" type="button" aria-label="بستن جست‌وجو">
+            <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>
+          </button>
+        </div>
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ Hero ============ -->
+    <section class="hero" id="home">
+      <div class="container hero__grid">
+        <div class="hero__content">
+          <span class="eyebrow">بازارگاه هوشمند دکوراسیون خانه</span>
+          <h1 class="hero__title">
+            خانه‌ای به سلیقه‌ی تو،
+            <span>با بودجه‌ی تو</span>
+          </h1>
+          <p class="hero__text">سبک مورد علاقه‌ات را انتخاب کن و یک پک دکوراسیون هماهنگ از محصولات فروشندگان مختلف بساز.</p>
+          <div class="hero__actions">
+            <a href="#builder" class="btn btn--primary btn--lg" data-scroll="builder">
+              پک اختصاصی منو بساز
+              <svg viewBox="0 0 24 24"><path d="M19 12H5m6-6-6 6 6 6"/></svg>
+            </a>
+            <a href="#packages" class="btn btn--ghost btn--lg" data-scroll="packages">مشاهده پک‌ها</a>
+          </div>
+          <ul class="hero__stats">
+            <li><strong>+۱۲۰</strong><span>فروشنده معتبر</span></li>
+            <li><strong>+۳٬۵۰۰</strong><span>محصول دکوراسیون</span></li>
+            <li><strong>۴</strong><span>سبک طراحی</span></li>
+          </ul>
+        </div>
+
+        <div class="hero__visual">
+          <div class="hero__arch media" data-label="چیدمانو">
+            <!-- تصویر اصلی: برای تغییر، فقط src را عوض کنید -->
+            <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1000&q=80" alt="نشیمن مینیمال با مبل کرم و نور طبیعی" fetchpriority="high">
+          </div>
+          <div class="hero__card">
+            <span class="hero__card-label">پک پیشنهادی امروز</span>
+            <strong>آرامش مینیمال</strong>
+            <div class="hero__card-row">
+              <span>۶ محصول از ۵ فروشنده</span>
+              <b id="heroPackPrice">—</b>
+            </div>
+          </div>
+          <div class="hero__seal" aria-hidden="true">
+            <span>هماهنگ</span>
+            <small>با سلیقه تو</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ انتخاب سبک ============ -->
+    <section class="section" id="styles">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-head__num">۰۱</span>
+          <div>
+            <span class="eyebrow">انتخاب سبک</span>
+            <h2 class="section-title">سبک خانه‌ات کدام است؟</h2>
+            <p class="section-desc">روی سبک دلخواهت بزن؛ انتخابت مستقیم در سازنده‌ی پک اعمال می‌شود.</p>
+          </div>
+        </div>
+        <div class="styles-grid" id="stylesGrid" role="radiogroup" aria-label="سبک‌های دکوراسیون"></div>
+        <div class="styles-note" id="styleNote"></div>
+      </div>
+    </section>
+
+    <!-- ============ ساخت پک اختصاصی ============ -->
+    <section class="builder" id="builder">
+      <div class="container">
+        <div class="section-head section-head--light">
+          <span class="section-head__num">۰۲</span>
+          <div>
+            <span class="eyebrow">ساخت پک اختصاصی</span>
+            <h2 class="section-title">چهار انتخاب، یک خانه‌ی هماهنگ</h2>
+            <p class="section-desc">فضا، سبک، رنگ و بودجه‌ات را مشخص کن تا از میان محصولات فروشندگان، بهترین ترکیب را برایت بچینیم.</p>
+          </div>
+        </div>
+
+        <div class="builder__grid">
+          <form class="builder__form" id="builderForm" novalidate>
+            <fieldset class="field">
+              <legend class="field__legend"><span class="field__step">۱</span>فضای خانه</legend>
+              <div class="room-options" id="roomOptions"></div>
+            </fieldset>
+
+            <fieldset class="field">
+              <legend class="field__legend"><span class="field__step">۲</span>سبک دکوراسیون</legend>
+              <div class="chip-options" id="styleOptions"></div>
+            </fieldset>
+
+            <fieldset class="field">
+              <legend class="field__legend"><span class="field__step">۳</span>رنگ مورد علاقه</legend>
+              <div class="color-options" id="colorOptions"></div>
+            </fieldset>
+
+            <fieldset class="field">
+              <legend class="field__legend"><span class="field__step">۴</span>بودجه</legend>
+              <div class="budget">
+                <div class="budget__value">
+                  <output id="budgetValue" for="budgetRange">۳۰٬۰۰۰٬۰۰۰</output>
+                  <span>تومان</span>
+                </div>
+                <input type="range" id="budgetRange" class="range" min="5000000" max="100000000" step="1000000" value="30000000" aria-label="بودجه به تومان">
+                <div class="budget__labels">
+                  <span id="budgetMinLabel">۵ میلیون</span>
+                  <span id="budgetMaxLabel">۱۰۰ میلیون</span>
+                </div>
+              </div>
+            </fieldset>
+
+            <button type="submit" class="btn btn--primary btn--lg btn--block" id="buildBtn">
+              <span class="btn__label">پک پیشنهادی من را بساز</span>
+              <span class="btn__spinner" aria-hidden="true"></span>
+            </button>
+          </form>
+
+          <div class="builder__result" id="builderResult" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ پک‌های پیشنهادی ============ -->
+    <section class="section" id="packages">
+      <div class="container">
+        <div class="section-head section-head--split">
+          <div class="section-head__main">
+            <span class="section-head__num">۰۳</span>
+            <div>
+              <span class="eyebrow">پک‌های آماده</span>
+              <h2 class="section-title">پک‌های پیشنهادی چیدمانو</h2>
+              <p class="section-desc">ترکیب‌هایی که طراحان ما از محصولات فروشندگان مختلف چیده‌اند.</p>
+            </div>
+          </div>
+          <a href="#builder" class="link-arrow" data-scroll="builder">پک خودت را بساز
+            <svg viewBox="0 0 24 24"><path d="M19 12H5m6-6-6 6 6 6"/></svg>
+          </a>
+        </div>
+        <div class="packages-grid" id="packagesGrid"></div>
+      </div>
+    </section>
+
+    <!-- ============ محصولات منتخب ============ -->
+    <section class="section section--cream" id="products">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-head__num">۰۴</span>
+          <div>
+            <span class="eyebrow">محصولات منتخب</span>
+            <h2 class="section-title">برگزیده‌های این فصل</h2>
+            <p class="section-desc">از فرش دستباف تا تابلوهای دیواری؛ مستقیم از فروشندگان معتبر.</p>
+          </div>
+        </div>
+        <div class="products-grid" id="productsGrid"></div>
+      </div>
+    </section>
+
+    <!-- ============ مزایا ============ -->
+    <section class="section" id="benefits">
+      <div class="container">
+        <div class="section-head section-head--center">
+          <span class="eyebrow">چرا چیدمانو؟</span>
+          <h2 class="section-title">دکوراسیون، بدون سردرگمی</h2>
+        </div>
+        <div class="benefits-grid">
+          <article class="benefit">
+            <span class="benefit__icon">
+              <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18c1 0 1.5-.7 1.5-1.5 0-.8-.6-1.2-.6-2 0-.8.7-1.5 1.5-1.5H17a4 4 0 0 0 4-4c0-5-4-9-9-9z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7.5" r="1"/></svg>
+            </span>
+            <h3>هماهنگی با سلیقه تو</h3>
+            <p>محصولات هر پک بر اساس سبک، فضا و رنگ انتخابی‌ات کنار هم چیده می‌شوند.</p>
+          </article>
+          <article class="benefit">
+            <span class="benefit__icon">
+              <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 14.5h2"/></svg>
+            </span>
+            <h3>مدیریت بودجه</h3>
+            <p>جمع قیمت پک هیچ‌وقت از بودجه‌ای که تعیین کرده‌ای بیشتر نمی‌شود.</p>
+          </article>
+          <article class="benefit">
+            <span class="benefit__icon">
+              <svg viewBox="0 0 24 24"><path d="M4 9l1.5-5h13L20 9"/><path d="M4 9a2.7 2.7 0 0 0 5.3 0 2.7 2.7 0 0 0 5.4 0 2.7 2.7 0 0 0 5.3 0"/><path d="M5 11v9h14v-9M10 20v-5h4v5"/></svg>
+            </span>
+            <h3>فروشندگان مختلف</h3>
+            <p>دسترسی هم‌زمان به محصولات ده‌ها فروشنده و هنرمند از شهرهای مختلف ایران.</p>
+          </article>
+          <article class="benefit">
+            <span class="benefit__icon">
+              <svg viewBox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>
+            </span>
+            <h3>شخصی‌سازی پک‌ها</h3>
+            <p>هر محصولی را که نخواستی از پک حذف کن و بقیه را با یک کلیک به سبد ببر.</p>
+          </article>
+        </div>
+
+        <!-- فروشندگان همکار -->
+        <div class="sellers" id="sellers">
+          <div class="sellers__head">
+            <h3>فروشندگان همکار</h3>
+            <span>محصولات این صفحه از این فروشندگان است</span>
+          </div>
+          <ul class="sellers__list" id="sellersList"></ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ فوتر ============ -->
+  <footer class="footer" id="contact">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <a href="#home" class="logo logo--light">
+          <span class="logo__mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32"><path d="M6 28V15a10 10 0 0 1 20 0v13"/><path d="M11 28v-9a5 5 0 0 1 10 0v9"/><path d="M3 28h26"/></svg>
+          </span>
+          <span class="logo__text">چیدمانو</span>
+        </a>
+        <p>چیدمانو بازارگاه هوشمند دکوراسیون خانه است؛ جایی که سلیقه‌ی تو، بودجه‌ی تو و محصولات فروشندگان مختلف در یک پک هماهنگ کنار هم قرار می‌گیرند.</p>
+      </div>
+
+      <div class="footer__col">
+        <h4>دسترسی سریع</h4>
+        <ul>
+          <li><a href="#home">صفحه اصلی</a></li>
+          <li><a href="#products">محصولات</a></li>
+          <li><a href="#packages">پک‌های دکوراسیون</a></li>
+          <li><a href="#sellers">فروشندگان</a></li>
+          <li><a href="#builder">ساخت پک اختصاصی</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>سبک‌ها</h4>
+        <ul id="footerStyles"></ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>تماس با ما</h4>
+        <ul class="footer__contact">
+          <li><span>تلفن:</span> <a href="tel:02112345678" dir="ltr">۰۲۱-۱۲۳۴۵۶۷۸</a></li>
+          <li><span>ایمیل:</span> <a href="mailto:hello@chidemano.ir" dir="ltr">hello@chidemano.ir</a></li>
+          <li><span>نشانی:</span> تهران، خیابان ولیعصر، کوچه نارون، پلاک ۱۲</li>
+          <li><span>پاسخ‌گویی:</span> شنبه تا پنجشنبه، ۹ تا ۱۸</li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <span>© ۱۴۰۵ چیدمانو. تمامی حقوق محفوظ است.</span>
+      <span>نسخه نمایشی — پروژه دانشگاهی</span>
+      <span><a href="{% url 'pages:about' %}">درباره ما</a> · <a href="{% url 'pages:contact' %}">تماس با ما</a></span>
+    </div>
+  </footer>
+
+  <!-- ============ لایه‌های شناور: سبد، علاقه‌مندی، مودال، اعلان ============ -->
+  <div class="overlay" id="overlay" hidden></div>
+
+  <aside class="drawer" id="cartDrawer" aria-hidden="true" aria-label="سبد خرید">
+    <div class="drawer__head">
+      <h3>سبد خرید <span class="drawer__count" id="cartDrawerCount"></span></h3>
+      <button class="icon-btn icon-btn--sm" type="button" data-close-drawer aria-label="بستن">
+        <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <div class="drawer__body" id="cartItems"></div>
+    <div class="drawer__foot" id="cartFoot">
+      <div class="drawer__total">
+        <span>جمع کل</span>
+        <strong id="cartTotal">۰ تومان</strong>
+      </div>
+      <button class="btn btn--primary btn--block" type="button" id="checkoutBtn">ادامه فرایند خرید</button>
+      <button class="btn btn--text" type="button" id="clearCartBtn">خالی کردن سبد</button>
+    </div>
+  </aside>
+
+  <aside class="drawer" id="wishlistDrawer" aria-hidden="true" aria-label="علاقه‌مندی‌ها">
+    <div class="drawer__head">
+      <h3>علاقه‌مندی‌ها <span class="drawer__count" id="wishlistDrawerCount"></span></h3>
+      <button class="icon-btn icon-btn--sm" type="button" data-close-drawer aria-label="بستن">
+        <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <div class="drawer__body" id="wishlistItems"></div>
+  </aside>
+
+  <div class="modal" id="packageModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal__backdrop" data-close-modal></div>
+    <div class="modal__dialog">
+      <button class="icon-btn icon-btn--sm modal__close" type="button" data-close-modal aria-label="بستن">
+        <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <div class="toasts" id="toasts" aria-live="assertive"></div>
+
+  <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

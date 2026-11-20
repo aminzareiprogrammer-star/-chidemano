@@ -1,0 +1,22 @@
+{% extends "base_subpage.html" %}
+{% block title %}ورود{% endblock %}
+{% block content %}
+<main class="subpage"><div class="container">
+  <header class="subpage__intro"><span class="eyebrow">خوش برگشتید</span><h1>ورود به چیدمانو</h1><p>برای مشاهده حساب کاربری و مدیریت انتخاب‌هایتان وارد شوید.</p></header>
+  <section class="form-panel" style="max-width:560px">
+    <form method="post">
+      {% csrf_token %}
+      {% if form.errors %}<div class="message message--error">نام کاربری یا گذرواژه صحیح نیست.</div>{% endif %}
+      <input type="hidden" name="next" value="{{ next }}">
+      <div style="display:grid;gap:18px">
+        <mdui-text-field class="form-field" label="نام کاربری" name="username" autocomplete="username" required variant="outlined"></mdui-text-field>
+        <mdui-text-field class="form-field" label="گذرواژه" name="password" type="password" autocomplete="current-password" toggle-password required variant="outlined"></mdui-text-field>
+      </div>
+      <div class="form-actions"><button type="submit" class="btn btn--primary btn--lg">
+    ورود به حساب
+</button></div>
+      <p class="form-note">هنوز حساب ندارید؟ <a href="{% url 'pages:register' %}">ثبت‌نام کنید</a></p>
+    </form>
+  </section>
+</div></main>
+{% endblock %}

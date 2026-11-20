@@ -1,0 +1,26 @@
+{% extends "base_subpage.html" %}
+{% block title %}ثبت‌نام{% endblock %}
+{% block content %}
+<main class="subpage"><div class="container">
+  <header class="subpage__intro"><span class="eyebrow">به خانواده چیدمانو بپیوندید</span><h1>ساخت حساب کاربری</h1><p>حساب بسازید تا انتخاب‌ها و علاقه‌مندی‌های دکوراسیون خود را بهتر مدیریت کنید.</p></header>
+  <section class="form-panel" style="max-width:720px">
+    <form method="post">
+      {% csrf_token %}
+      {% if form.non_field_errors %}<div class="message">{{ form.non_field_errors }}</div>{% endif %}
+      <div class="form-grid">
+        <mdui-text-field class="form-field" label="نام" name="first_name" value="{{ form.first_name.value|default:'' }}" required variant="outlined"></mdui-text-field>
+        <mdui-text-field class="form-field" label="نام خانوادگی" name="last_name" value="{{ form.last_name.value|default:'' }}" required variant="outlined"></mdui-text-field>
+        <mdui-text-field class="form-field wide" label="نام کاربری" name="username" value="{{ form.username.value|default:'' }}" required variant="outlined"></mdui-text-field>
+        <mdui-text-field class="form-field wide" label="ایمیل" name="email" type="email" value="{{ form.email.value|default:'' }}" required variant="outlined"></mdui-text-field>
+        <mdui-text-field class="form-field" label="گذرواژه" name="password1" type="password" toggle-password required variant="outlined"></mdui-text-field>
+        <mdui-text-field class="form-field" label="تکرار گذرواژه" name="password2" type="password" toggle-password required variant="outlined"></mdui-text-field>
+      </div>
+      {% for field in form %}{% if field.errors %}<p class="field-error">{{ field.label }}: {{ field.errors|striptags }}</p>{% endif %}{% endfor %}
+      <div class="form-actions"><button type="submit" class="btn btn--primary btn--lg">
+    ایجاد حساب کاربری
+</button></div>
+      <p class="form-note">قبلاً حساب ساخته‌اید؟ <a href="{% url 'login' %}">وارد شوید</a></p>
+    </form>
+  </section>
+</div></main>
+{% endblock %}
