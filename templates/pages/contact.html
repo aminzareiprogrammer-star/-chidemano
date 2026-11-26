@@ -17,7 +17,7 @@
         <div><mdui-text-field class="form-field" label="نام و نام خانوادگی" name="name" value="{{ form.name.value|default:'' }}" required variant="outlined"></mdui-text-field>{% if form.name.errors %}<p class="field-error">{{ form.name.errors|striptags }}</p>{% endif %}</div>
         <div><mdui-text-field class="form-field" label="ایمیل" name="email" type="email" value="{{ form.email.value|default:'' }}" required variant="outlined"></mdui-text-field>{% if form.email.errors %}<p class="field-error">{{ form.email.errors|striptags }}</p>{% endif %}</div>
         <div class="wide"><mdui-text-field class="form-field wide" label="موضوع پیام" name="subject" value="{{ form.subject.value|default:'' }}" required variant="outlined"></mdui-text-field>{% if form.subject.errors %}<p class="field-error">{{ form.subject.errors|striptags }}</p>{% endif %}</div>
-        <div class="wide"><mdui-text-field class="form-field wide" label="متن پیام" name="message" type="textarea" rows="5" value="{{ form.message.value|default:'' }}" required variant="outlined"></mdui-text-field>{% if form.message.errors %}<p class="field-error">{{ form.message.errors|striptags }}</p>{% endif %}</div>
+        <div class="wide"><mdui-text-field class="form-field wide" label="متن پیام" name="message" textarea rows="5" value="{{ form.message.value|default:'' }}" required variant="outlined"></mdui-text-field>{% if form.message.errors %}<p class="field-error">{{ form.message.errors|striptags }}</p>{% endif %}</div>
       </div>
       <div class="form-actions"><button type="submit" class="btn btn--primary btn--lg">
     ارسال پیام

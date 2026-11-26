@@ -5,3 +5,5 @@ __pycache__/
 venv/
 staticfiles/
 .DS_Store
+*.sqlite3
+media/

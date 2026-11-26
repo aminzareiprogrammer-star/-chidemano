@@ -13,6 +13,7 @@ class ContactMessage(models.Model):
     is_read = models.BooleanField("بررسی شده؟", default=False)
 
     class Meta:
+        db_table = "contact"
         ordering = ["-created_at"]
         verbose_name = "پیام تماس"
         verbose_name_plural = "پیام‌های تماس"

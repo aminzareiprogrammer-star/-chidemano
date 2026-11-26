@@ -1,0 +1,45 @@
+{% extends "base_subpage.html" %}
+{% block title %}کاتالوگ محصولات{% endblock %}
+{% block content %}
+<main class="subpage">
+  <div class="container">
+    <header class="subpage__intro">
+      <span class="eyebrow">ویترین چیدمانو</span>
+      <h1>کاتالوگ محصولات</h1>
+      <p>محصولات دکوراسیون ثبت‌شده را ببینید و برای مشاهده جزئیات هر محصول وارد صفحه آن شوید.</p>
+    </header>
+
+    {% if products %}
+      <p class="catalog-count">تعداد محصولات: {{ products|length }}</p>
+      <section class="catalog-grid" aria-label="فهرست محصولات">
+        {% for product in products %}
+          <article class="catalog-card">
+            <a class="catalog-card__image" href="{% url 'products:detail' product.pk %}">
+              {% if product.image_url %}
+                <img src="{{ product.image_url }}" alt="{{ product.name }}" loading="lazy">
+              {% else %}
+                <span class="catalog-card__placeholder">⌂</span>
+              {% endif %}
+            </a>
+            <div class="catalog-card__body">
+              <span class="catalog-card__category">{{ product.category }}</span>
+              <h2><a href="{% url 'products:detail' product.pk %}">{{ product.name }}</a></h2>
+              <p>{{ product.description|truncatechars:105|default:"برای این محصول توضیحاتی ثبت نشده است." }}</p>
+              <div class="catalog-card__bottom">
+                <strong>{{ product.price|floatformat:0 }} تومان</strong>
+                <a class="btn btn--primary btn--sm" href="{% url 'products:detail' product.pk %}">مشاهده محصول</a>
+              </div>
+              {% if not product.is_available %}<span class="catalog-unavailable">ناموجود</span>{% endif %}
+            </div>
+          </article>
+        {% endfor %}
+      </section>
+    {% else %}
+      <div class="catalog-empty"><h2>هنوز محصولی ثبت نشده است</h2><p>پس از افزودن محصولات از پنل مدیریت، آن‌ها در این صفحه نمایش داده می‌شوند.</p></div>
+    {% endif %}
+  </div>
+</main>
+<style>
+.catalog-count{color:var(--ink-soft);margin:0 0 18px}.catalog-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}.catalog-card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}.catalog-card__image{height:230px;display:flex;align-items:center;justify-content:center;background:var(--cream);overflow:hidden}.catalog-card__image img{width:100%;height:100%;object-fit:cover}.catalog-card__placeholder{font-size:5rem;color:var(--olive)}.catalog-card__body{padding:20px}.catalog-card__category{font-size:.82rem;color:var(--olive);font-weight:700}.catalog-card h2{font-size:1.2rem;margin:8px 0}.catalog-card h2 a{color:var(--ink);text-decoration:none}.catalog-card p{color:var(--ink-soft);min-height:48px;line-height:1.9}.catalog-card__bottom{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:16px}.catalog-card__bottom strong{font-size:.95rem}.catalog-unavailable{display:inline-block;margin-top:12px;color:#a33b2d;font-size:.85rem}.catalog-empty{text-align:center;padding:55px 20px;background:var(--paper);border:1px solid var(--line);border-radius:20px}.catalog-empty p{color:var(--ink-soft)}@media(max-width:900px){.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.catalog-grid{grid-template-columns:1fr}.catalog-card__image{height:210px}}
+</style>
+{% endblock %}

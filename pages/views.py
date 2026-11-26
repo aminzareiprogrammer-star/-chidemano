@@ -41,6 +41,7 @@ def register(request):
             login(request, user)
             messages.success(request, "حساب کاربری شما با موفقیت ساخته شد.")
             return redirect("pages:home")
+        messages.error(request, "ثبت‌نام انجام نشد؛ خطاهای فرم را بررسی کنید.")
     else:
         form = RegisterForm()
     return render(request, "pages/register.html", {"form": form})

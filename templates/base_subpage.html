@@ -48,6 +48,7 @@
     <a href="{% url 'pages:home' %}" class="logo"><span class="logo__mark">⌂</span><span class="logo__text">چیدمانو</span></a>
     <nav class="nav" aria-label="منوی اصلی">
       <a href="{% url 'pages:home' %}" class="nav__link">صفحه اصلی</a>
+      <a href="{% url 'products:catalog' %}" class="nav__link">کاتالوگ محصولات</a>
       <a href="{% url 'pages:about' %}" class="nav__link">درباره ما</a>
       <a href="{% url 'pages:contact' %}" class="nav__link">تماس با ما</a>
     </nav>
@@ -64,6 +65,6 @@
 </header>
 {% if messages %}<div class="container messages">{% for message in messages %}<div class="message">{{ message }}</div>{% endfor %}</div>{% endif %}
 {% block content %}{% endblock %}
-<footer class="footer"><div class="container footer__bottom"><span>© ۱۴۰۵ چیدمانو. تمامی حقوق محفوظ است.</span><span><a href="{% url 'pages:about' %}">درباره ما</a> · <a href="{% url 'pages:contact' %}">تماس با ما</a></span></div></footer>
+<footer class="footer"><div class="container footer__bottom"><span>© ۱۴۰۵ چیدمانو. تمامی حقوق محفوظ است.</span><span><a href="{% url 'products:catalog' %}">محصولات</a> · <a href="{% url 'pages:about' %}">درباره ما</a> · <a href="{% url 'pages:contact' %}">تماس با ما</a></span></div></footer>
 <script src="https://cdn.jsdelivr.net/npm/mdui@2/mdui.global.js"></script>
 </body></html>
